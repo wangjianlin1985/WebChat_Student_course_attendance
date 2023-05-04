@@ -1,0 +1,52 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，为了对sql语句进行隔离，方便管理，mapper开发dao方式，使用namespace有特殊作用  
+mapper代理开发时将namespace指定为mapper接口的全限定名  
+ -->
+<mapper namespace="com.chengxusheji.mapper.OrderInfoMapper"> 
+<!--在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象 
+mapper.xml以statement为单位管理sql语句  
+ -->
+	<!-- 添加考勤记录记录 -->
+	<insert id="addOrderInfo" parameterType="orderInfo">
+		insert into t_orderInfo(userObj,courseObj,orderDate,intervalObj,totalMoney,payWayObj,payAccount,orderStateObj,orderTime,receiveName,telephone,address,orderMemo) values 
+		(#{userObj.user_name},#{courseObj.courseId},#{orderDate},#{intervalObj.intervalId},#{totalMoney},#{payWayObj.payWayId},#{payAccount},#{orderStateObj},#{orderTime},#{receiveName},#{telephone},#{address},#{orderMemo})
+	</insert>
+
+	<!-- 按照查询条件分页查询考勤记录记录 -->
+	<select id="queryOrderInfo" resultMap="orderInfoMap" >
+		select t_orderInfo.* from t_orderInfo,t_payWay,t_course,t_timeInterval,t_userInfo ${where} and t_orderInfo.userObj = t_userInfo.user_name and t_orderInfo.courseObj = t_course.courseId and t_orderInfo.intervalObj = t_timeInterval.intervalId and t_orderInfo.payWayObj = t_payWay.payWayId order by t_orderInfo.orderTime DESC limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="orderInfoMap" type="orderInfo">
+        <id property="orderNo" column="orderNo" />
+        <association property="userObj" column="userObj" select="com.chengxusheji.mapper.UserInfoMapper.getUserInfo" />
+        <association property="courseObj" column="courseObj" select="com.chengxusheji.mapper.CourseMapper.getCourse" />
+        <association property="intervalObj" column="intervalObj" select="com.chengxusheji.mapper.TimeIntervalMapper.getTimeInterval" />
+        <association property="payWayObj" column="payWayObj" select="com.chengxusheji.mapper.PayWayMapper.getPayWay" />
+    </resultMap>
+
+    <!-- 按照查询条件查询所有考勤记录记录 -->
+	<select id="queryOrderInfoList" resultMap="orderInfoMap" >
+		select t_orderInfo.* from t_orderInfo,t_payWay,t_course,t_timeInterval,t_userInfo ${where} and t_orderInfo.userObj = t_userInfo.user_name and t_orderInfo.courseObj = t_course.courseId and t_orderInfo.intervalObj = t_timeInterval.intervalId and t_orderInfo.payWayObj = t_payWay.payWayId
+	</select>
+
+    <!-- 按照查询条件的考勤记录记录数 -->
+	<select id="queryOrderInfoCount" resultType="int">
+		select count(*) from t_orderInfo,t_payWay,t_course,t_timeInterval,t_userInfo ${where} and t_orderInfo.userObj = t_userInfo.user_name and t_orderInfo.courseObj = t_course.courseId and t_orderInfo.intervalObj = t_timeInterval.intervalId and t_orderInfo.payWayObj = t_payWay.payWayId
+	</select>
+
+	<!-- 根据主键查询某个考勤记录记录 -->
+	<select id="getOrderInfo" parameterType="int" resultMap="orderInfoMap">
+		select * from t_orderInfo where t_orderInfo.orderNo = #{orderNo}
+	</select>
+
+	<!-- 更新考勤记录记录 -->
+	<update id="updateOrderInfo" parameterType="orderInfo">
+		update t_orderInfo set userObj=#{userObj.user_name},courseObj=#{courseObj.courseId},orderDate=#{orderDate},intervalObj=#{intervalObj.intervalId},totalMoney=#{totalMoney},payWayObj=#{payWayObj.payWayId},payAccount=#{payAccount},orderStateObj=#{orderStateObj},orderTime=#{orderTime},receiveName=#{receiveName},telephone=#{telephone},address=#{address},orderMemo=#{orderMemo} where orderNo = #{orderNo}
+	</update>
+
+	<!-- 删除考勤记录记录 -->
+	<delete id="deleteOrderInfo" parameterType="int">
+		delete from t_orderInfo where orderNo=#{orderNo}
+	</delete>
+
+</mapper>

@@ -1,0 +1,34 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+  <view class="title">编辑课程类型</view>
+
+  <view class="courseType_modify_view">
+    <form bindsubmit="formSubmit">
+       <view class="formItem">
+        <view class="label">课程类型id：</view>
+        <view class="formControl">
+          <input type="text" name="courseType.courseTypeId" disabled="true" value="{{courseTypeId}}" />
+        </view>
+      </view>
+      <view class="formItem">
+        <view class="label">课程类型名称：</view>
+        <view class="formControl">
+          <input type="text" name="courseType.courseTypeName" placeholder="请输入课程类型名称" value="{{courseTypeName}}" />
+        </view>
+      </view>
+
+      <view class="formItem" style="align-items:flex-start;">
+        <view class="label">课程类型说明：</view>
+        <view class="formControl">
+           <textarea placeholder="请输入课程类型说明" maxlength="800" name="courseType.courseTypeDesc" value="{{courseTypeDesc}}" />
+        </view>
+      </view>
+
+      <view>
+        <button class="vBtn_ok" formType="submit" disabled="{{disabled}}">提交修改</button>
+      </view>
+    </form>
+  </view>
+</view>

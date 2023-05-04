@@ -1,0 +1,48 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，为了对sql语句进行隔离，方便管理，mapper开发dao方式，使用namespace有特殊作用  
+mapper代理开发时将namespace指定为mapper接口的全限定名  
+ -->
+<mapper namespace="com.chengxusheji.mapper.TimeIntervalMapper"> 
+<!--在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象 
+mapper.xml以statement为单位管理sql语句  
+ -->
+	<!-- 添加时段记录 -->
+	<insert id="addTimeInterval" parameterType="timeInterval">
+		insert into t_timeInterval(intervalName,product) values 
+		(#{intervalName},#{product})
+	</insert>
+
+	<!-- 按照查询条件分页查询时段记录 -->
+	<select id="queryTimeInterval" resultMap="timeIntervalMap" >
+		select t_timeInterval.* from t_timeInterval ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="timeIntervalMap" type="timeInterval">
+        <id property="intervalId" column="intervalId" />
+    </resultMap>
+
+    <!-- 按照查询条件查询所有时段记录 -->
+	<select id="queryTimeIntervalList" resultMap="timeIntervalMap" >
+		select t_timeInterval.* from t_timeInterval ${where}
+	</select>
+
+    <!-- 按照查询条件的时段记录数 -->
+	<select id="queryTimeIntervalCount" resultType="int">
+		select count(*) from t_timeInterval ${where}
+	</select>
+
+	<!-- 根据主键查询某个时段记录 -->
+	<select id="getTimeInterval" parameterType="int" resultMap="timeIntervalMap">
+		select * from t_timeInterval where t_timeInterval.intervalId = #{intervalId}
+	</select>
+
+	<!-- 更新时段记录 -->
+	<update id="updateTimeInterval" parameterType="timeInterval">
+		update t_timeInterval set intervalName=#{intervalName},product=#{product} where intervalId = #{intervalId}
+	</update>
+
+	<!-- 删除时段记录 -->
+	<delete id="deleteTimeInterval" parameterType="int">
+		delete from t_timeInterval where intervalId=#{intervalId}
+	</delete>
+
+</mapper>

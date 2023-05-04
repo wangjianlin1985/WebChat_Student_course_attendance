@@ -1,0 +1,34 @@
+<view class="container">
+  <loading hidden="{{loadingHide}}">
+    {{loadingText}}
+  </loading>
+  <view class="title">编辑时段</view>
+
+  <view class="timeInterval_modify_view">
+    <form bindsubmit="formSubmit">
+       <view class="formItem">
+        <view class="label">时段id：</view>
+        <view class="formControl">
+          <input type="text" name="timeInterval.intervalId" disabled="true" value="{{intervalId}}" />
+        </view>
+      </view>
+      <view class="formItem">
+        <view class="label">时段名称：</view>
+        <view class="formControl">
+          <input type="text" name="timeInterval.intervalName" placeholder="请输入时段名称" value="{{intervalName}}" />
+        </view>
+      </view>
+
+      <view class="formItem">
+        <view class="label">商品数量：</view>
+        <view class="formControl">
+          <input type="text" name="timeInterval.product" placeholder="请输入商品数量" value="{{product}}" />
+        </view>
+      </view>
+
+      <view>
+        <button class="vBtn_ok" formType="submit" disabled="{{disabled}}">提交修改</button>
+      </view>
+    </form>
+  </view>
+</view>

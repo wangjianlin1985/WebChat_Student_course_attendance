@@ -1,0 +1,85 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/system/user",
+    "pages/system/about",
+    "pages/system/lianx",
+    "pages/userInfo/userInfo_add",
+    "pages/userInfo/userInfo_detail",
+    "pages/userInfo/userInfo_list",
+    "pages/userInfo/userInfo_modify",
+    "pages/courseType/courseType_add",
+    "pages/courseType/courseType_detail",
+    "pages/courseType/courseType_list",
+    "pages/courseType/courseType_modify",
+    "pages/course/course_add",
+    "pages/course/course_detail",
+    "pages/course/course_list",
+    "pages/course/course_modify",
+    "pages/orderInfo/orderInfo_add",
+    "pages/orderInfo/orderInfo_detail",
+    "pages/orderInfo/orderInfo_list",
+    "pages/orderInfo/orderInfo_modify",
+    "pages/payWay/payWay_add",
+    "pages/payWay/payWay_detail",
+    "pages/payWay/payWay_list",
+    "pages/payWay/payWay_modify",
+    "pages/timeInterval/timeInterval_add",
+    "pages/timeInterval/timeInterval_detail",
+    "pages/timeInterval/timeInterval_list",
+    "pages/timeInterval/timeInterval_modify",
+    "pages/leaveword/leaveword_add",
+    "pages/leaveword/leaveword_userAdd",
+    "pages/leaveword/leaveword_detail",
+    "pages/leaveword/leaveword_list",
+    "pages/leaveword/leaveword_modify",
+    "pages/notice/notice_add",
+    "pages/notice/notice_detail",
+    "pages/notice/notice_list",
+    "pages/notice/notice_modify",
+    "pages/mobile/mobile",
+    "pages/orderInfo/orderInfo_user_add"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "小程序客户端",
+    "navigationBarBackgroundColor": "#00AC2C",
+    "backgroundColor": "#EEEEEE",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#b7b7b7",
+    "selectedColor": "#00AC2C",
+    "borderStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icons/icon_home.png",
+        "selectedIconPath": "images/icons/icon_home_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/course/course_list",
+        "iconPath": "images/icons/icon_cate.png",
+        "selectedIconPath": "images/icons/icon_cate_selected.png",
+        "text": "课程查询"
+      },
+      {
+        "pagePath": "pages/orderInfo/orderInfo_list",
+        "iconPath": "images/icons/icon_cart.png",
+        "selectedIconPath": "images/icons/icon_cart_selected.png",
+        "text": "我的考勤"
+      },
+      {
+        "pagePath": "pages/system/user",
+        "iconPath": "images/icons/icon_member.png",
+        "selectedIconPath": "images/icons/icon_member_selected.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

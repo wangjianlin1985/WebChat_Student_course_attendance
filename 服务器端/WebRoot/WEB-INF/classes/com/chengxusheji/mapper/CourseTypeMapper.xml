@@ -1,0 +1,48 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，为了对sql语句进行隔离，方便管理，mapper开发dao方式，使用namespace有特殊作用  
+mapper代理开发时将namespace指定为mapper接口的全限定名  
+ -->
+<mapper namespace="com.chengxusheji.mapper.CourseTypeMapper"> 
+<!--在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象 
+mapper.xml以statement为单位管理sql语句  
+ -->
+	<!-- 添加课程类型记录 -->
+	<insert id="addCourseType" parameterType="courseType">
+		insert into t_courseType(courseTypeName,courseTypeDesc) values 
+		(#{courseTypeName},#{courseTypeDesc})
+	</insert>
+
+	<!-- 按照查询条件分页查询课程类型记录 -->
+	<select id="queryCourseType" resultMap="courseTypeMap" >
+		select t_courseType.* from t_courseType ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="courseTypeMap" type="courseType">
+        <id property="courseTypeId" column="courseTypeId" />
+    </resultMap>
+
+    <!-- 按照查询条件查询所有课程类型记录 -->
+	<select id="queryCourseTypeList" resultMap="courseTypeMap" >
+		select t_courseType.* from t_courseType ${where}
+	</select>
+
+    <!-- 按照查询条件的课程类型记录数 -->
+	<select id="queryCourseTypeCount" resultType="int">
+		select count(*) from t_courseType ${where}
+	</select>
+
+	<!-- 根据主键查询某个课程类型记录 -->
+	<select id="getCourseType" parameterType="int" resultMap="courseTypeMap">
+		select * from t_courseType where t_courseType.courseTypeId = #{courseTypeId}
+	</select>
+
+	<!-- 更新课程类型记录 -->
+	<update id="updateCourseType" parameterType="courseType">
+		update t_courseType set courseTypeName=#{courseTypeName},courseTypeDesc=#{courseTypeDesc} where courseTypeId = #{courseTypeId}
+	</update>
+
+	<!-- 删除课程类型记录 -->
+	<delete id="deleteCourseType" parameterType="int">
+		delete from t_courseType where courseTypeId=#{courseTypeId}
+	</delete>
+
+</mapper>
